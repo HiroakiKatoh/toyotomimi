@@ -1,0 +1,20 @@
+# 環境変数・設定
+.env
+config.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+
+# uv
+# uv.lock はコミット推奨のため除外しない
+
+# モデルキャッシュ・出力
+*.wav
+*.mp3
+*.m4a
+output/

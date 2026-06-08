@@ -1,0 +1,46 @@
+[project]
+name = "toyotomimi"
+version = "0.1.0"
+description = "豊聡耳 - 音声ファイルから話者を分離して文字起こしするデスクトップアプリ"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+dependencies = [
+    "PySide6>=6.6",
+    "python-dotenv>=1.0",
+]
+
+# クラウド処理(AssemblyAI)のみ利用する場合は `uv sync --extra cloud`
+# ローカル処理(faster-whisper + pyannote)を使う場合は `uv sync --extra local`
+[project.optional-dependencies]
+cloud = [
+    "assemblyai>=0.35",
+]
+local = [
+    "faster-whisper>=1.1",
+    "pyannote.audio>=3.3",
+    "torch>=2.2",
+    "torchaudio>=2.2",
+]
+
+[project.scripts]
+toyotomimi = "toyotomimi.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/toyotomimi"]
+
+# GPU未検出環境向けに torch は CPU 版 wheel を使用する。
+# これにより CUDA 依存の肥大化と Python/CUDA バージョン不整合を避ける。
+[tool.uv]
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
