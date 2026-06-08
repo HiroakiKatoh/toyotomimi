@@ -175,7 +175,3 @@ src/toyotomimi/
 - **uv** や **ffmpeg** を PATH に追加したあとも、**PowerShell やアプリを開き直す**と反映されます。
 - ローカル処理が CUDA を検出した場合は自動的に GPU を使用します。
 - Windows のローカル処理では pyannote 4.x の都合で音声をメモリ上の波形として渡しています（torchcodec 非依存）。ユーザー側の追加設定は不要です。
-
-## ライセンス
-
-MIT
